@@ -469,6 +469,25 @@ width: 95%;
   transform: scale(1);
 }
 
+.swiper .image-holder {
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 1 / 1; /* Keeps it square */
+  height: auto;
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.swiper .image-holder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
 .slide-clip .swiper-slide .image-holder {
   clip-path: inset(100% 0 0 0);
   display: block;
@@ -669,4 +688,471 @@ width: 95%;
   .bg-text:after {
     right: 0;
   }
+}
+
+/* Video Container and Play Button Styles */
+.video-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.play-button-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.3s ease;
+}
+
+.play-button-overlay:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.play-button {
+  background: rgba(255, 83, 74, 0.9);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.play-button:hover {
+  transform: scale(1.1);
+  background: rgba(255, 83, 74, 1);
+}
+
+.play-button svg {
+  margin-left: 4px; /* Slight offset to center the play icon */
+}
+
+/* Hide overlay when video is playing */
+.video-container.playing .play-button-overlay {
+  display: none;
+}
+
+/* Experience Section Styles */
+.experience-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.experience-section {
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #333;
+}
+
+.title-icon {
+  width: 50px;
+  height: 50px;
+  background: #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.section-heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+
+/* Experience Cards */
+.experience-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  border-left: 4px solid #333;
+  border: 1px solid #e0e0e0;
+}
+
+.experience-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  border-left-color: #007acc;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.date-badge {
+  background: #333;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.card-icon {
+  font-size: 2rem;
+}
+
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 0.5rem;
+}
+
+.card-subtitle {
+  color: #666;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Achievement Cards */
+.achievement-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  color: #111;
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #dee2e6;
+}
+
+.achievement-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 122, 204, 0.05) 0%, rgba(0, 122, 204, 0.02) 100%);
+  z-index: 1;
+}
+
+.achievement-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  border-color: #007acc;
+}
+
+.achievement-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.achievement-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 2;
+  color: #111;
+}
+
+.achievement-year {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.achievement-badge {
+  background: #333;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Hobby Cards */
+.hobby-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  text-align: center;
+  border-top: 4px solid #333;
+  border: 1px solid #e0e0e0;
+}
+
+.hobby-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  border-top-color: #007acc;
+}
+
+.hobby-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hobby-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 1rem;
+}
+
+.hobby-description {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .section-heading {
+    font-size: 2rem;
+  }
+  
+  .experience-card,
+  .achievement-card,
+  .hobby-card {
+    padding: 1.5rem;
+  }
+  
+  .title-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+/* Video Showcase Styles */
+.video-showcase {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.video-category-section {
+  margin-bottom: 4rem;
+}
+
+.category-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.category-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.category-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 0.5rem;
+}
+
+.category-description {
+  color: #666;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Video Cards */
+.video-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  border: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.video-category-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #333;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 10;
+}
+
+.video-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.video-container {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced Play Button */
+.play-button-overlay {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+}
+
+.play-button-overlay:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.play-button {
+  background: rgba(0, 122, 204, 0.9);
+  border: 2px solid white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.play-button:hover {
+  background: rgba(0, 122, 204, 1);
+  transform: scale(1.1);
+}
+
+/* Responsive Video Design */
+@media (max-width: 768px) {
+  .category-title {
+    font-size: 2rem;
+  }
+  
+  .video-card {
+    padding: 1rem;
+  }
+  
+  .video-title {
+    font-size: 1.1rem;
+  }
+  
+  .category-icon {
+    font-size: 2.5rem;
+  }
+}
+
+/* Contact Form Styles */
+.contact-form-wrapper {
+  background: white;
+  border-radius: 15px;
+  padding: 3rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e0e0e0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-header h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 0.5rem;
+}
+
+.form-header p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.contact-form .form-control {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form .form-control:focus {
+  border-color: #007acc;
+  box-shadow: 0 0 0 0.2rem rgba(0, 122, 204, 0.25);
+}
+
+.contact-form .btn {
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.contact-form .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .contact-form-wrapper {
+    padding: 2rem;
+    margin: 0 1rem;
+  }
+  
+  .form-header h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Standardized Section Header Styles */
+.section-header {
+  margin-bottom: 4rem;
+}
+
+.section-header .text-muted {
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.section-header h2 {
+  margin-bottom: 1rem;
+}
+
+.section-header .lead {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Ensure consistent spacing across all sections */
+.section-header + .container,
+.section-header + .experience-grid,
+.section-header + .video-showcase {
+  margin-top: 2rem;
 }

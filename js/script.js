@@ -126,6 +126,27 @@
     })
   }
 
+  // Video play function
+  window.playVideo = function(videoId) {
+    const video = document.getElementById(videoId);
+    const container = video.closest('.video-container');
+    
+    // Add autoplay parameter to the video URL
+    const currentSrc = video.src;
+    const newSrc = currentSrc.includes('?') ? 
+      currentSrc + '&autoplay=1' : 
+      currentSrc + '?autoplay=1';
+    
+    video.src = newSrc;
+    
+    // Add playing class to hide the overlay
+    container.classList.add('playing');
+    
+    // Remove the onclick handler to prevent multiple clicks
+    const overlay = container.querySelector('.play-button-overlay');
+    overlay.style.pointerEvents = 'none';
+  };
+
   $(document).ready(function () {
 
     overlayMenu();
