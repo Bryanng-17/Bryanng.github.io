@@ -696,6 +696,43 @@ width: 95%;
   cursor: pointer;
 }
 
+/* Video placeholder styles */
+.video-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Ensure videos are completely disabled from autoplay */
+.video-container iframe {
+  pointer-events: none; /* Prevent accidental interaction on mobile */
+  opacity: 0.8; /* Slightly dimmed to show it's not active */
+  transition: opacity 0.3s ease;
+}
+
+/* Enable pointer events and restore opacity when user explicitly interacts */
+.video-container.playing iframe {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+/* Add a subtle visual indicator that video is not playing */
+.video-container:not(.playing) .play-button-overlay {
+  background: rgba(0, 0, 0, 0.4); /* Slightly darker overlay when not playing */
+}
+
 .play-button-overlay {
   position: absolute;
   top: 0;
@@ -1155,4 +1192,36 @@ width: 95%;
 .section-header + .experience-grid,
 .section-header + .video-showcase {
   margin-top: 2rem;
+}
+
+/* Memory Page Styles */
+.memory-section {
+  margin-bottom: 4rem;
+}
+
+.memory-section .section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.memory-section .section-heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 0.5rem;
+}
+
+.memory-section .section-description {
+  color: #666;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Memory Page Responsive */
+@media (max-width: 768px) {
+  .memory-section .section-heading {
+    font-size: 2rem;
+  }
 }

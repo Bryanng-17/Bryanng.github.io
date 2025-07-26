@@ -36,6 +36,10 @@
   var swiper = new Swiper(".portfolio-Swiper", {
     slidesPerView: 4,
     spaceBetween: 30,
+    autoplay: {
+      delay: 3000, // 3 seconds delay between slides
+      disableOnInteraction: false, // Continue autoplay after user interaction
+    },
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
@@ -127,25 +131,61 @@
   }
 
   // Video play function
-  window.playVideo = function(videoId) {
-    const video = document.getElementById(videoId);
-    const container = video.closest('.video-container');
-    
-    // Add autoplay parameter to the video URL
-    const currentSrc = video.src;
-    const newSrc = currentSrc.includes('?') ? 
-      currentSrc + '&autoplay=1' : 
-      currentSrc + '?autoplay=1';
-    
-    video.src = newSrc;
-    
-    // Add playing class to hide the overlay
-    container.classList.add('playing');
-    
-    // Remove the onclick handler to prevent multiple clicks
-    const overlay = container.querySelector('.play-button-overlay');
-    overlay.style.pointerEvents = 'none';
+window.playVideo = function(videoId) {
+  const video = document.getElementById(videoId);
+  const placeholder = document.getElementById(videoId + '-placeholder');
+  const container = video.closest('.video-container');
+
+  // Hide placeholder and show video
+  if (placeholder) {
+    placeholder.style.display = 'none';
+  }
+  video.style.display = 'block';
+
+  // Set the actual video source with autoplay
+  const videoSources = {
+    'video1': 'videos/singing1.mp4?autoplay=1',
+    'video2': 'videos/singing2.mp4?autoplay=1',
+    'video3': 'videos/dancing1.mp4?autoplay=1',
+    'video4': 'videos/dancing2.mp4?autoplay=1'
   };
+
+  video.src = videoSources[videoId];
+
+  // Add playing class to hide the overlay
+  container.classList.add('playing');
+
+  // Remove the onclick handler to prevent multiple clicks
+  const overlay = container.querySelector('.play-button-overlay');
+  overlay.style.pointerEvents = 'none';
+};
+
+// Reset all videos to initial state when page loads
+window.addEventListener('load', function() {
+  const videos = document.querySelectorAll('.video-container iframe');
+  videos.forEach(function(video) {
+    // Reset video to blank and hide it
+    video.src = 'about:blank';
+    video.style.display = 'none';
+    
+    // Show placeholder
+    const videoId = video.id;
+    const placeholder = document.getElementById(videoId + '-placeholder');
+    if (placeholder) {
+      placeholder.style.display = 'block';
+    }
+    
+    // Reset container state
+    const container = video.closest('.video-container');
+    container.classList.remove('playing');
+    
+    // Reset overlay
+    const overlay = container.querySelector('.play-button-overlay');
+    if (overlay) {
+      overlay.style.pointerEvents = 'auto';
+    }
+  });
+});
 
   $(document).ready(function () {
 

@@ -11,6 +11,9 @@
   <meta name="author" content="">
   <meta name="keywords" content="">
   <meta name="description" content="">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <link rel="stylesheet" type="text/css" href="css/vendor.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -561,7 +564,10 @@
                       <h4 class="video-title">"我好吗"</h4>
                       <div class="video-container">
                         <div class="ratio ratio-16x9">
-                          <iframe id="video1" src="videos/singing1.mp4?autoplay=0" title="Singing Video" allowfullscreen></iframe>
+                          <div class="video-placeholder" id="video1-placeholder">
+                            <img src="images/s1.jpg" alt="Video Thumbnail" class="img-fluid">
+                          </div>
+                          <iframe id="video1" src="about:blank" title="Singing Video" allowfullscreen style="display: none;"></iframe>
                         </div>
                         <div class="play-button-overlay" onclick="playVideo('video1')">
                           <div class="play-button">
@@ -579,7 +585,10 @@
                       <h4 class="video-title">"人啊"</h4>
                       <div class="video-container">
                         <div class="ratio ratio-16x9">
-                          <iframe id="video2" src="videos/singing2.mp4?autoplay=0" title="Singing Video" allowfullscreen></iframe>
+                          <div class="video-placeholder" id="video2-placeholder">
+                            <img src="images/s2.jpg" alt="Video Thumbnail" class="img-fluid">
+                          </div>
+                          <iframe id="video2" src="about:blank" title="Singing Video" allowfullscreen style="display: none;"></iframe>
                         </div>
                         <div class="play-button-overlay" onclick="playVideo('video2')">
                           <div class="play-button">
@@ -608,7 +617,10 @@
                       <h4 class="video-title">"Trendsetter"</h4>
                       <div class="video-container">
                         <div class="ratio ratio-16x9">
-                          <iframe id="video3" src="videos/dancing1.mp4?autoplay=0" title="Dancing Video" allowfullscreen></iframe>
+                          <div class="video-placeholder" id="video3-placeholder">
+                            <img src="images/d1.jpg" alt="Video Thumbnail" class="img-fluid">
+                          </div>
+                          <iframe id="video3" src="about:blank" title="Dancing Video" allowfullscreen style="display: none;"></iframe>
                         </div>
                         <div class="play-button-overlay" onclick="playVideo('video3')">
                           <div class="play-button">
@@ -626,7 +638,10 @@
                       <h4 class="video-title">"Home Sweet Home"</h4>
                       <div class="video-container">
                         <div class="ratio ratio-16x9">
-                          <iframe id="video4" src="videos/dancing2.mp4?autoplay=0" title="Dancing Video" allowfullscreen></iframe>
+                          <div class="video-placeholder" id="video4-placeholder">
+                            <img src="images/d2.jpg" alt="Video Thumbnail" class="img-fluid">
+                          </div>
+                          <iframe id="video4" src="about:blank" title="Dancing Video" allowfullscreen style="display: none;"></iframe>
                         </div>
                         <div class="play-button-overlay" onclick="playVideo('video4')">
                           <div class="play-button">
@@ -696,6 +711,36 @@
     crossorigin="anonymous"></script>
   <script src="js/plugins.js"></script>
   <script src="js/script.js"></script>
+  <script>
+    // Force reset videos on page load/navigation
+    document.addEventListener('DOMContentLoaded', function() {
+      const videos = document.querySelectorAll('.video-container iframe');
+      videos.forEach(function(video) {
+        // Reset video to blank and hide it
+        video.src = 'about:blank';
+        video.style.display = 'none';
+        
+        // Show placeholder
+        const videoId = video.id;
+        const placeholder = document.getElementById(videoId + '-placeholder');
+        if (placeholder) {
+          placeholder.style.display = 'block';
+        }
+        
+        // Reset container state
+        const container = video.closest('.video-container');
+        if (container) {
+          container.classList.remove('playing');
+          
+          // Reset overlay
+          const overlay = container.querySelector('.play-button-overlay');
+          if (overlay) {
+            overlay.style.pointerEvents = 'auto';
+          }
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
