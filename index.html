@@ -762,8 +762,8 @@
         // Show thank you message
         alert('Thanks for your feedback!');
         
-        // Refresh the page
-        window.location.reload();
+        // Refresh the page and go back to top (remove any hash)
+        window.location.href = window.location.href.split('#')[0];
       });
     });
   </script>
