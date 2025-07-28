@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Contact Form Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="contact-form-wrapper">
+                    <div class="form-header text-center mb-4">
+                        <h3>Contact Form - Local Test Version</h3>
+                        <p class="text-muted">This is a local testing version. Emails won't actually be sent.</p>
+                    </div>
+
+                    <div class="contact-form">
+                        <form id="contactForm" class="form-group">
+                            <div class="pb-3">
+                                <input type="text" name="name" placeholder="Your Full Name" class="form-control" required>
+                            </div>
+                            <div class="pb-3">
+                                <input type="email" name="email" placeholder="Your Email Address" class="form-control" required>
+                            </div>
+                            <div class="pb-4">
+                                <textarea name="message" placeholder="Your Message" rows="6" class="form-control" required></textarea>
+                            </div>
+                            <button type="submit" name="submit" class="btn btn-dark w-100 btn-rounded" id="submitBtn">
+                                <span class="btn-text">Send Message (Local Test)</span>
+                                <span class="btn-loading" style="display: none;">
+                                    <svg class="spinner" width="20" height="20" viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" stroke-dasharray="31.416" stroke-dashoffset="31.416">
+                                            <animate attributeName="stroke-dasharray" dur="2s" values="0 31.416;15.708 15.708;0 31.416" repeatCount="indefinite"/>
+                                            <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416" repeatCount="indefinite"/>
+                                        </circle>
+                                    </svg>
+                                    Sending...
+                                </span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline-flex';
+                submitBtn.disabled = true;
+                
+                // Simulate API call delay
+                setTimeout(() => {
+                    // Simulate success response
+                    showMessage('✅ Local Test: Message would be sent successfully! (This is a simulation)', 'success');
+                    contactForm.reset();
+                    
+                    // Reset button state
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+                }, 2000); // 2 second delay to simulate network request
+            });
+
+            // Function to show messages
+            function showMessage(message, type) {
+                // Remove existing messages
+                const existingMessage = document.querySelector('.form-message');
+                if (existingMessage) {
+                    existingMessage.remove();
+                }
+
+                // Create new message
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `form-message alert alert-${type === 'success' ? 'success' : 'danger'} mt-3`;
+                messageDiv.innerHTML = `
+                    <strong>${type === 'success' ? 'Success!' : 'Error!'}</strong><br>
+                    ${message}<br>
+                    <small class="text-muted">Note: This is a local test. On the live site, emails will be sent to huangm871@gmail.com</small>
+                `;
+                
+                // Insert after form
+                contactForm.parentNode.insertBefore(messageDiv, contactForm.nextSibling);
+                
+                // Auto-remove after 8 seconds
+                setTimeout(() => {
+                    if (messageDiv.parentNode) {
+                        messageDiv.remove();
+                    }
+                }, 8000);
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -690,17 +690,28 @@
                     </div>
 
                     <div class="contact-form">
-                      <form id="form" class="form-group">
+                      <form id="contactForm" action="https://formspree.io/f/xpzgwqzg" method="POST" class="form-group">
                         <div class="pb-3">
-                          <input type="text" name="name" placeholder="Your Full Name" class="form-control">
+                          <input type="text" name="name" placeholder="Your Full Name" class="form-control" required>
                         </div>
                         <div class="pb-3">
-                          <input type="email" name="email" placeholder="Your Email Address" class="form-control">
+                          <input type="email" name="email" placeholder="Your Email Address" class="form-control" required>
                         </div>
                         <div class="pb-4">
-                          <textarea placeholder="Your Message" rows="6" class="form-control"></textarea>
+                          <textarea name="message" placeholder="Your Message" rows="6" class="form-control" required></textarea>
                         </div>
-                        <button type="submit" name="submit" class="btn btn-dark w-100 btn-rounded">Send Message</button>
+                        <button type="submit" name="submit" class="btn btn-dark w-100 btn-rounded" id="submitBtn">
+                          <span class="btn-text">Send Message</span>
+                          <span class="btn-loading" style="display: none;">
+                            <svg class="spinner" width="20" height="20" viewBox="0 0 24 24">
+                              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" stroke-dasharray="31.416" stroke-dashoffset="31.416">
+                                <animate attributeName="stroke-dasharray" dur="2s" values="0 31.416;15.708 15.708;0 31.416" repeatCount="indefinite"/>
+                                <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416" repeatCount="indefinite"/>
+                              </circle>
+                            </svg>
+                            Sending...
+                          </span>
+                        </button>
                       </form>
                     </div>
                   </div>
@@ -752,6 +763,78 @@
           }
         }
       });
+
+      // Contact form handling
+      const contactForm = document.getElementById('contactForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = submitBtn.querySelector('.btn-text');
+      const btnLoading = submitBtn.querySelector('.btn-loading');
+
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Show loading state
+        btnText.style.display = 'none';
+        btnLoading.style.display = 'inline-flex';
+        submitBtn.disabled = true;
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        
+        // Submit form using fetch
+        fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.ok) {
+            // Success
+            showMessage('Thank you! Your message has been sent successfully.', 'success');
+            contactForm.reset();
+          } else {
+            // Error
+            showMessage(data.error || 'Sorry, there was an error sending your message. Please try again.', 'error');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          showMessage('Sorry, there was an error sending your message. Please try again.', 'error');
+        })
+        .finally(() => {
+          // Reset button state
+          btnText.style.display = 'inline';
+          btnLoading.style.display = 'none';
+          submitBtn.disabled = false;
+        });
+      });
+
+      // Function to show messages
+      function showMessage(message, type) {
+        // Remove existing messages
+        const existingMessage = document.querySelector('.form-message');
+        if (existingMessage) {
+          existingMessage.remove();
+        }
+
+        // Create new message
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `form-message alert alert-${type === 'success' ? 'success' : 'danger'} mt-3`;
+        messageDiv.textContent = message;
+        
+        // Insert after form
+        contactForm.parentNode.insertBefore(messageDiv, contactForm.nextSibling);
+        
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+          if (messageDiv.parentNode) {
+            messageDiv.remove();
+          }
+        }, 5000);
+      }
     });
   </script>
 </body>

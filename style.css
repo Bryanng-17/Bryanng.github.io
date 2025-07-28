@@ -719,7 +719,7 @@ width: 95%;
 .video-container video {
   width: 100%;
   height: 100%;
-  object-fit: fit;
+  object-fit: contain;
   background: #000;
 }
 
@@ -834,11 +834,11 @@ width: 95%;
   border: 1px solid #e0e0e0;
 }
 
-.experience-card:hover {
+/* .experience-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
   border-left-color: #007acc;
-}
+} */
 
 .card-header {
   display: flex;
@@ -898,11 +898,11 @@ width: 95%;
   z-index: 1;
 }
 
-.achievement-card:hover {
+/* .achievement-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
   border-color: #007acc;
-}
+} */
 
 .achievement-icon {
   font-size: 3rem;
@@ -952,11 +952,11 @@ width: 95%;
   border: 1px solid #e0e0e0;
 }
 
-.hobby-card:hover {
+/* .hobby-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
   border-top-color: #007acc;
-}
+} */
 
 .hobby-icon {
   font-size: 3rem;
@@ -1162,6 +1162,57 @@ width: 95%;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+.contact-form .btn-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-form .spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.form-message {
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  animation: slideIn 0.3s ease-out;
+}
+
+.form-message.alert-success {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+}
+
+.form-message.alert-danger {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Disable button when submitting */
+.contact-form .btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 @media (max-width: 768px) {
   .contact-form-wrapper {
     padding: 2rem;
@@ -1254,4 +1305,23 @@ width: 95%;
     pointer-events: auto;
     opacity: 1;
   }
+}
+
+/* Video ratio container styles */
+.video-container .ratio {
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-container .ratio-16x9 {
+  aspect-ratio: 16 / 9;
+}
+
+/* Ensure video fills the container properly */
+.video-container .ratio video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
 }
