@@ -715,15 +715,23 @@ width: 95%;
   object-fit: cover;
 }
 
+/* Video element styles */
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: fit;
+  background: #000;
+}
+
 /* Ensure videos are completely disabled from autoplay */
-.video-container iframe {
+.video-container video {
   pointer-events: none; /* Prevent accidental interaction on mobile */
   opacity: 0.8; /* Slightly dimmed to show it's not active */
   transition: opacity 0.3s ease;
 }
 
 /* Enable pointer events and restore opacity when user explicitly interacts */
-.video-container.playing iframe {
+.video-container.playing video {
   pointer-events: auto;
   opacity: 1;
 }
@@ -1223,5 +1231,27 @@ width: 95%;
 @media (max-width: 768px) {
   .memory-section .section-heading {
     font-size: 2rem;
+  }
+}
+
+/* Mobile-specific video styles */
+@media (max-width: 768px) {
+  .video-container video {
+    /* Ensure proper fullscreen handling on mobile */
+    -webkit-playsinline: true;
+    playsinline: true;
+    /* Prevent zoom on iOS */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .video-container.playing video {
+    /* Allow full interaction when playing */
+    pointer-events: auto;
+    opacity: 1;
   }
 }

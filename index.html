@@ -251,7 +251,7 @@
               </div>
             </div>
           </section>
-          <section id="about" class="my-5 py-5 bg-text" data-text="03">
+          <section id="about" class="my-5 py-5 bg-text" data-text="02">
             <div class="section-header my-5" data-aos="fade-up">
               <div class="row justify-content-center g-5">
                 <div class="col-lg-6 text-center">
@@ -344,7 +344,7 @@
             </div>
           </section>
 
-          <section id="experience" class="my-5 py-5 bg-text" data-text="02">
+          <section id="experience" class="my-5 py-5 bg-text" data-text="03">
             <div class="section-header my-5" data-aos="fade-up">
               <div class="row justify-content-center g-5">
                 <div class="col-lg-6 text-center">
@@ -567,7 +567,10 @@
                           <div class="video-placeholder" id="video1-placeholder">
                             <img src="images/s1.jpg" alt="Video Thumbnail" class="img-fluid">
                           </div>
-                          <iframe id="video1" src="about:blank" title="Singing Video" allowfullscreen style="display: none;"></iframe>
+                          <video id="video1" controls preload="none" poster="images/s1.jpg" playsinline style="display: none;">
+                            <source src="videos/singing1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
                         </div>
                         <div class="play-button-overlay" onclick="playVideo('video1')">
                           <div class="play-button">
@@ -588,7 +591,10 @@
                           <div class="video-placeholder" id="video2-placeholder">
                             <img src="images/s2.jpg" alt="Video Thumbnail" class="img-fluid">
                           </div>
-                          <iframe id="video2" src="about:blank" title="Singing Video" allowfullscreen style="display: none;"></iframe>
+                          <video id="video2" controls preload="none" poster="images/s2.jpg" playsinline style="display: none;">
+                            <source src="videos/singing2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
                         </div>
                         <div class="play-button-overlay" onclick="playVideo('video2')">
                           <div class="play-button">
@@ -620,7 +626,10 @@
                           <div class="video-placeholder" id="video3-placeholder">
                             <img src="images/d1.jpg" alt="Video Thumbnail" class="img-fluid">
                           </div>
-                          <iframe id="video3" src="about:blank" title="Dancing Video" allowfullscreen style="display: none;"></iframe>
+                          <video id="video3" controls preload="none" poster="images/d1.jpg" playsinline style="display: none;">
+                            <source src="videos/dancing1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
                         </div>
                         <div class="play-button-overlay" onclick="playVideo('video3')">
                           <div class="play-button">
@@ -641,7 +650,10 @@
                           <div class="video-placeholder" id="video4-placeholder">
                             <img src="images/d2.jpg" alt="Video Thumbnail" class="img-fluid">
                           </div>
-                          <iframe id="video4" src="about:blank" title="Dancing Video" allowfullscreen style="display: none;"></iframe>
+                          <video id="video4" controls preload="none" poster="images/d2.jpg" playsinline style="display: none;">
+                            <source src="videos/dancing2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
                         </div>
                         <div class="play-button-overlay" onclick="playVideo('video4')">
                           <div class="play-button">
@@ -658,7 +670,7 @@
             </div>
           </section>
 
-          <section id="contact" class="my-5 py-5 bg-text" data-text="05">
+          <section id="contact" class="my-5 py-5 bg-text" data-text="06">
             <div class="section-header my-5" data-aos="fade-up">
               <div class="row justify-content-center g-5">
                 <div class="col-lg-6 text-center">
@@ -714,10 +726,11 @@
   <script>
     // Force reset videos on page load/navigation
     document.addEventListener('DOMContentLoaded', function() {
-      const videos = document.querySelectorAll('.video-container iframe');
+      const videos = document.querySelectorAll('.video-container video');
       videos.forEach(function(video) {
-        // Reset video to blank and hide it
-        video.src = 'about:blank';
+        // Pause and reset video
+        video.pause();
+        video.currentTime = 0;
         video.style.display = 'none';
         
         // Show placeholder

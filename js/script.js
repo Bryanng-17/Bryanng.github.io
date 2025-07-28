@@ -142,15 +142,8 @@ window.playVideo = function(videoId) {
   }
   video.style.display = 'block';
 
-  // Set the actual video source with autoplay
-  const videoSources = {
-    'video1': 'videos/singing1.mp4?autoplay=1',
-    'video2': 'videos/singing2.mp4?autoplay=1',
-    'video3': 'videos/dancing1.mp4?autoplay=1',
-    'video4': 'videos/dancing2.mp4?autoplay=1'
-  };
-
-  video.src = videoSources[videoId];
+  // Play the video
+  video.play();
 
   // Add playing class to hide the overlay
   container.classList.add('playing');
@@ -162,10 +155,11 @@ window.playVideo = function(videoId) {
 
 // Reset all videos to initial state when page loads
 window.addEventListener('load', function() {
-  const videos = document.querySelectorAll('.video-container iframe');
+  const videos = document.querySelectorAll('.video-container video');
   videos.forEach(function(video) {
-    // Reset video to blank and hide it
-    video.src = 'about:blank';
+    // Pause and reset video
+    video.pause();
+    video.currentTime = 0;
     video.style.display = 'none';
     
     // Show placeholder
