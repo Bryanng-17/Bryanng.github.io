@@ -2,12 +2,12 @@ from PIL import Image, ImageDraw, ImageFont
 
 # Settings
 text = "Bryan"
-font_path = "COOPBL.TTF"  # Change to your logo's font if you have it
-font_size = 120          # Adjust as needed
-text_color = (80, 80, 80, 255)  # Dark gray, fully opaque
+font_path = "COOPBL.TTF" 
+font_size = 120         
+text_color = (80, 80, 80, 255)  
 
 # Create a transparent image
-img_width, img_height = 400, 150  # Adjust as needed
+img_width, img_height = 400, 150 
 image = Image.new("RGBA", (img_width, img_height), (255, 255, 255, 0))
 
 # Load font
